@@ -22,7 +22,7 @@ class Store
   validates :annual_revenue, numericality: {greater_than: 0}
   validate :one_of_mens_or_womens_apparel
   def one_of_mens_or_womens_apparel
-    if mens_apparel == false || womens_apparel == false
+    if mens_apparel == false && womens_apparel == false
       errors.add(:store, "must carry at least one of the mens or womens apparel")
     end
   end
@@ -31,5 +31,5 @@ end
 puts 'Enter a store name'
 store_name = gets.chomp
 
-@new_store = Store.create(name: store_name)
+@new_store = Store.create(name: store_name, annual_revenue: 0, mens_apparel: false, womens_apparel: false)
 puts @new_store.errors.full_messages
